@@ -1,0 +1,52 @@
+
+pragma solidity ^0.8.20;
+
+// Creating a smart contract named SimpleBank
+contract SimpleBank {
+
+    // Variable to store the bank account balance
+    // uint means unsigned integer (cannot store negative numbers)
+    // public allows Remix to read this variable automatically
+    // Initially, balance = 0
+    uint public balance;
+
+
+    // Function to deposit money into the account
+    // amount is the money we want to deposit
+    // public means this function can be called externally
+    function deposit(uint amount) public {
+
+        // Checking that the deposit amount is greater than zero
+        // If false, the transaction will fail
+        require(amount > 0, "Invalid amount");
+
+        // Adding the deposit amount to the existing balance
+        balance += amount;
+    }
+
+
+    // Function to withdraw money from the account
+    function withdraw(uint amount) public {
+
+        // Checking that withdrawal amount is greater than zero
+        require(amount > 0, "Invalid amount");
+
+        // Checking whether sufficient balance is available
+        // If amount is greater than balance, withdrawal fails
+        require(amount <= balance, "Insufficient balance");
+
+        // Subtracting the withdrawal amount from balance
+        balance -= amount;
+    }
+
+
+    // Function to display the current account balance
+    // view means this function only reads data
+    // returns (uint) means it returns an unsigned integer
+    function ShowBalance() public view returns (uint) {
+
+        // Returning the current balance
+        return balance;
+    }
+
+}
